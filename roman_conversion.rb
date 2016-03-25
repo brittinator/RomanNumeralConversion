@@ -8,20 +8,28 @@ ROMAN_NUMBER_CONV = {
   "M"=>1000
 }
 
+def get_input
+  puts "Welcome to Roman Numeral --> Arabic converted."
+  puts "Please enter a Roman numeral string: "
+  input = gets.chomp
+  converted = convert_roman(input)
+  puts "The roman numeral #{input} is #{converted} converted into arabic."
+  puts "Thank you come again!"
+end
+
 def convert_roman(input)
   # special rule: if smaller number is in front of bigger,
   # subtract smaller from bigger
-  return 0 if input.nil? # guard clause
+  input = input.upcase!
   converted_number = 0
-
   len = input.length
   i = 0
   while i < len
-    char = ROMAN_NUMBER_CONV[input[i]].to_i
+    char = ROMAN_NUMBER_CONV[input[i]]
     if input[i+1].nil? # for last number
       next_char = 0
     else
-      next_char = ROMAN_NUMBER_CONV[input[i+1]].to_i
+      next_char = ROMAN_NUMBER_CONV[input[i+1]]
     end
 
     if next_char > char
@@ -31,14 +39,7 @@ def convert_roman(input)
     end
     i += 1
   end
-
   return converted_number
 end
 
-puts "#{convert_roman("I")}"
-puts "#{convert_roman("III")}"
-puts "#{convert_roman("IV")}"
-puts "#{convert_roman("IX")}"
-puts "#{convert_roman("XI")}"
-puts "#{convert_roman("MMXIV")}"
-puts "#{convert_roman("MCMIV")}"
+get_input #run program
